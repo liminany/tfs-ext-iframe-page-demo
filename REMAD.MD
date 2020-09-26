@@ -21,6 +21,8 @@ index.html: 插件页面iframe 中加载的页面，将此页面部署至WebServ
 ## 扩展点
 
 TFS 工作下添加了一个Tab页面
+![](imgs/tfs-work-hub-tab.png)
 
 TFS 工作项编辑表单处添加Tab页面
 
+![](imgs/tfs-workitem-form-tab.png)
