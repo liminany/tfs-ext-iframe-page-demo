@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="lib/VSS.SDK.min.js"></script>
+    <style>
+        body {
+            background-color: rgb(0, 67, 117);
+            color: white;
+            margin: 10px;    
+            font-family: "Segoe UI VSS (Regular)","-apple-system",BlinkMacSystemFont,"Segoe UI",sans-serif;
+        }
+    </style>
+    <script type="text/javascript">
+        VSS.init();
+        VSS.ready(function() {
+            alert(VSS.getWebContext().user.name);
+            document.getElementById("name").innerText = VSS.getWebContext().user.name;
+        });
+        function receive(evt) {
+            debugger
+            if(evt.data == "queryContext") {
+                event.source.postMessage(JSON.stringify(VSS.getWebContext()),"*");
+            }	
+        }	
+        window.addEventListener("message",receive);	
+
+        /*
+        function receive(evt) {
+            debugger
+            if(evt.data == "queryContext") {
+                return;
+            }
+            console.log(e.data);
+            var context = JSON.parse(e.data);
+            console.log(context);
+        }
+
+        var userId = null;
+        if(!userId && window.parent) {
+            debuggger
+            window.parent.postMessage("queryContext","*");
+        }
+        */
+    </script>
+</head>
+<body>        
+    <div style="height: 100px;max-height: 100px;"> <h1>Hello, <span id="name"></span></h1><h5>this is plugin page</h5></div>
+    <div>
+        <iframe name="demo-frame1" id="demo-frame1" src="http://localhost/iframe/" frameborder="0" style="position:absolute;left:0px;top:0px;overflow:hidden;width:100%;height:85%" width="100%" height="85%" />
+    </div>
+</body>
+</html>

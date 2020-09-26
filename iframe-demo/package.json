@@ -1,0 +1,46 @@
+{
+  "name": "iframe-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run clean && webpack --mode production",
+    "postbuild": "npm run package -- --rev-version",
+    "package": "tfx extension create --manifest-globs vss-extension.json",
+    "clean": "rimraf ./dist && rimraf ./*.vsix",
+    "pub:prod": "tfx extension publish --publisher lean-soft --extension-id timetracker-extension --service-url %TFSServerUrl% --token %TFSExtensionPublishToken%",
+    "pub:dev": "tfx extension publish --publisher lean-soft --extension-id timetracker-extension --service-url %TFSServerUrl% --token %TFSExtensionPublishToken%"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/underscore": "^1.9.4",
+    "axios": "^0.19.0",
+    "azure-devops-ui": "~1.157.0",
+    "chart.js": "^2.9.3",
+    "jquery": "^3.4.1",
+    "react": "~16.8.1",
+    "react-dom": "~16.8.1",
+    "url-loader": "^3.0.0",
+    "vss-web-extension-sdk": "^5.141.0"
+  },
+  "devDependencies": {
+    "@types/bootstrap": "^4.3.1",
+    "@types/chartjs": "0.0.31",
+    "@types/react": "~16.8.2",
+    "@types/react-dom": "~16.8.0",
+    "base64-inline-loader": "^1.1.1",
+    "copy-webpack-plugin": "^4.5.4",
+    "css-loader": "~1.0.0",
+    "file-loader": "^2.0.0",
+    "rimraf": "~2.6.2",
+    "sass-loader": "~7.1.0",
+    "style-loader": "~0.23.1",
+    "tfx-cli": "^0.6.3",
+    "ts-loader": "~5.2.2",
+    "typescript": "^2.9.2",
+    "webpack": "^4.22.0",
+    "webpack-cli": "^3.1.2"
+  }
+}

@@ -1,0 +1,56 @@
+{
+    "manifestVersion": 1,
+    "id": "tfs-ext-iframe-demo",
+    "publisher": "lena-soft",
+    "version": "1.0.106",
+    "name": "tfs-et-iframe-demo",
+    "description": "A sample Visual Studio Services extension",
+    "public": false,
+    "categories": ["Plan and track"],
+		"targets": [
+			{
+				"id": "Microsoft.VisualStudio.Services"
+				}
+			],
+		
+		"contributions": [
+			{
+				"id": "iframe.demo-wit-list-hub",
+				"type": "ms.vss-web.hub",
+				"description": "Adds a 'Hello' hub to the Work hub group.",
+				"targets": [
+					"ms.vss-work-web.work-hub-group"
+					],
+				"properties": {
+					"name": "Hello IFrame",
+					"order": 99,
+					"uri": "workitem-hub.html"
+				}
+            },
+            {  
+                "id": "iframe.demo-form-tab-hub",
+                "type": "ms.vss-work-web.work-item-form-page",
+                "description": "Custom work item form page",
+                "targets": [
+                    "ms.vss-work-web.work-item-form"
+                ],
+                "properties": {
+                    "name": "FP IFrame Page",
+                    "uri": "workitem-hub.html"
+                } 
+            }
+        ],
+        
+		"scopes": [ "vso.work", "vso.work_write" ],
+        "files": [
+            {
+                "path": "workitem-hub.html",
+                "addressable": true
+            },
+            {
+                "path": "node_modules/vss-web-extension-sdk/lib",
+                "addressable": true,
+                "packagePath": "lib"
+            }
+        ]
+}
