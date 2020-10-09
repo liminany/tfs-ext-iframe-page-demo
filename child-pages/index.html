@@ -32,8 +32,9 @@
             var context = JSON.parse(evt.data);
             console.log(context);
             if(context) {
-                document.getElementById("name").innerText = context.user.id;
-                userId = context.user.id;
+                //document.getElementById("name").innerText = context.user.id;
+                //userId = context.user.id;
+                console.log(context);
             }
         }
 
@@ -46,11 +47,26 @@
             }
             window.addEventListener("message",receive);	
         }
+        function navigationTo(btn) {
+            console.log(btn);
+            alert(btn.title);
+            if(btn.title) {
+                var data = {cmd:"navigationTo",data:{url:btn.title}};
+                window.parent.postMessage(JSON.stringify(data),"*");
+            }
+            else{
+                window.parent.postMessage({cmd:"navigationTo",data:{url:"http://win-j4ounpm2mvi:8080/tfs/DefaultCollection/Demo/_workitems?id=1&_a=edit"}},"*");
+            }
+
+        }
     </script>
 </head>
 <body onload="loaded()">        
-    <div> <h1>this is iframe page. Hello,iframe,current tfs user id is: <span id="name"></span></h1></div>
+    <div> 
+        <h1>this is iframe page. Hello,iframe,current tfs user id is: <span id="name"></span></h1>
+    </div>
     <div>
-       </div>
+        <button class="btn" text="navigation" value="navigation" onclick="navigationTo(this)" title="http://win-j4ounpm2mvi:8080/tfs/DefaultCollection/Demo/_workitems?id=1&_a=edit">navigation</button>
+    </div>
 </body>
 </html>

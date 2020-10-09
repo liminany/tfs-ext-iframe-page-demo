@@ -12,27 +12,36 @@
     </style>
     <script type="text/javascript">
         VSS.init();
-
-        // Get navigation service
-        VSS.getService(VSS.ServiceIds.Navigation).then(function(navigationService) {
-            // Get current hash value from host url
-            navigationService.getHash().then(function (hash) {
-                console.log("Host hash value: " + hash);                        
+        function navigationTo(data) {
+            VSS.getService(VSS.ServiceIds.Navigation).then(function(navigationService) {
+                // Get current hash value from host url
+                navigationService.getHash().then(function (hash) {
+                    console.log("Host hash value: " + hash);                        
+                });
+                navigationService.reload();
+                alert("navigate");
+                navigationService.navigate("http://win-j4ounpm2mvi:8080/tfs/DefaultCollection/Demo/_workitems?id=1&_a=edit");
             });
-            navigationService.reload();
-            alert("navigate");
-            navigationService.navigate("http://win-j4ounpm2mvi:8080/tfs/DefaultCollection/Demo/_workitems?id=1&_a=edit");
-        });
+        }
+        // Get navigation service
+       
 
         VSS.ready(function() {
             alert(VSS.getWebContext().user.name);
             document.getElementById("name").innerText = VSS.getWebContext().user.name;
         });
         function receive(evt) {
+            console.log(evt.data);
             debugger
             if(evt.data == "queryContext") {
                 event.source.postMessage(JSON.stringify(VSS.getWebContext()),"*");
             }	
+            else if(evt.data.cmd=="navigationTo") {
+                
+                navigationTo(evt.data);
+            }
+            
+            
         }	
         window.addEventListener("message",receive);	
 
